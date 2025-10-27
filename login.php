@@ -45,8 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             header('Location: index.php');
             exit;
-        }
+  }
+        
     }
+    
 
     $stmt->close();
 
@@ -83,16 +85,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <style>
 
     .popup {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 15px 25px;
+ position: fixed;
+  top: 13%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 40px;
   border-radius: 10px;
   color: #fff;
   font-weight: 500;
-  animation: fadeOut 4s forwards;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  animation: fadeOut 2s forwards;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.4);
   z-index: 9999;
+  font-size: 18px;
+  text-align: center;
 }
 .popup.success { background-color: #4CAF50; } 
 .popup.error { background-color: #f44336; }
@@ -104,6 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
     body{
         background-color: lightblue;
+        padding: 80px;
     }
 
     .container{
@@ -113,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         flex-direction: column;
         gap: 35px;
         margin: 10px;
-        padding: 50px;
+        padding: 70px;
         border-radius: 10px;
         background-color: white;
         width: 90%;

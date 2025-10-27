@@ -20,10 +20,6 @@ if (empty($_SESSION['id'])) {
 }
 
 $username = $_SESSION['username'] ?? 'Guest';
-
-
-
-
 ?>
 
 
@@ -38,7 +34,7 @@ $username = $_SESSION['username'] ?? 'Guest';
 <style>
 
   h2{
-     padding: 80px;
+     padding: 220px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -65,16 +61,19 @@ $username = $_SESSION['username'] ?? 'Guest';
   }
 
     .popup {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 15px 25px;
-  border-radius: 10px;
+ position: fixed;
+  top: 13%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 40px;
+  border-radius: 5px;
   color: #fff;
   font-weight: 500;
-  animation: fadeOut 4s forwards;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  animation: fadeOut 2s forwards;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.4);
   z-index: 9999;
+  font-size: 18px;
+  text-align: center;
 }
 .popup.success { background-color: #4CAF50; } 
 .popup.error { background-color: #f44336; }

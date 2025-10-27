@@ -24,28 +24,25 @@ function flash($key = null, $value = null) {
 
     if ($key !== null && $value !== null) {
 
+
         $_SESSION['flash'][$key] = $value;
 
         return;
 
     }
 
-     if ($key !== null) {
+    if ($key !== null && isset($_SESSION['flash'][$key])) {
+
+        $message = $_SESSION['flash'][$key];
+
+        unset($_SESSION['flash'][$key]);
         
-        if (!empty($_SESSION['flash'][$key])) {
-
-            $v = $_SESSION['flash'][$key];
-
-            unset($_SESSION['flash'][$key]);
-
-            return $v;
-        }
+        return $message;
     }
+
     return null;
 
-    
-
-
 }
+
 
 ?>
