@@ -12,7 +12,6 @@ require 'config.php';
 if (empty($_SESSION['id'])) {
 
 
-    flash('error', 'Please login first.');
 
 
     header('Location: login.php');
@@ -149,7 +148,7 @@ p{
       color: white;
     }
 
-    .logout-btn {
+    #logoutBtn {
       background-color: lightblue;
       color: black;
       padding: 8px 15px;
@@ -198,22 +197,58 @@ p{
 
   <body>
 
+
+
+
+
   <footer>
     © 2025 Login.com | All Rights Reserved
   </footer>
 
 
 
-<?php if ($msg = flash('error')): ?>
-  <div class="popup error"><?= htmlspecialchars($msg) ?></div>
-<?php elseif ($msg = flash('success')): ?>
-  <div class="popup success"><?= htmlspecialchars($msg) ?></div>
-<?php endif; ?>
+
 
 
   <h2>Welcome, <?=htmlspecialchars($username)?></h2>
 
-  <a href="logout.php">Logout</a>
+ <button id="logoutBtn">Logout</button>
+<div id="logoutMsg"></div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$("#logoutBtn").click(function() {
+  $.ajax({
+    url: "ajax/ajax_logout.php",
+    type: "POST",
+    success: function(response) {
+      if (response.trim() === "success") {
+        $("#logoutMsg")
+          .css({
+            "color": "green",
+            "font-weight": "bold",
+            "text-align": "center",
+            "margin-top": "20px"
+          })
+          .text("Logout successful! Redirecting...");
+        setTimeout(() => window.location.href = "login.php", 1500);
+      } else {
+        $("#logoutMsg")
+          .css("color", "red")
+          .text("Logout failed. Try again.");
+      }
+    },
+    error: function() {
+      $("#logoutMsg")
+        .css("color", "red")
+        .text("Server error. Please try again.");
+    }
+  });
+});
+</script>
+
+
   
 
   
