@@ -49,6 +49,25 @@
   
 
     }
+    a {
+    text-decoration: none;
+    color: darkblue;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid darkblue;
+    border-radius: 5px;
+    background-color: lightblue;
+  }
+   button {
+    padding: 10px 20px;
+    border: none;
+    background-color: darkblue;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
   </style>
 </head>
 <body>
@@ -80,8 +99,9 @@ $("#loginForm").submit(function(e) {
     data: $(this).serialize(),
     success: function(response) {
       if (response.trim() === "success") {
-        $("#loginMsg").css("color", "green").text("Login successful! Redirecting...");
         setTimeout(() => window.location.href = "index.php", 1500);
+        $("#loginMsg").css("color", "green").text("Login successful! Redirecting...");
+        
       } else {
         $("#loginMsg").css("color", "red").text(response);
       }

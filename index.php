@@ -216,14 +216,47 @@ p{
 <div id="logoutMsg"></div>
 
 
+
+<div id="loginMsg"></div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+$("#loginForm").submit(function(e) {
+  e.preventDefault();
+
+  $.ajax({
+    url: "ajax/ajax_login.php",  
+    type: "POST",
+    data: $(this).serialize(),
+    success: function(response) {
+      if (response.trim() === "success") {
+        setTimeout(() => window.location.href = "index.php", 1500);
+        $("#loginMsg").css("color", "green").text("Login successful! Redirecting...");
+        
+      } else {
+        $("#loginMsg").css("color", "red").text(response);
+      }
+    },
+    error: function() {
+      $("#loginMsg").css("color", "red").text("Server error. Please try again.");
+    }
+  });
+});
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
 $("#logoutBtn").click(function() {
+
   $.ajax({
     url: "ajax/ajax_logout.php",
     type: "POST",
     success: function(response) {
       if (response.trim() === "success") {
+
+
         $("#logoutMsg")
           .css({
             "color": "green",
