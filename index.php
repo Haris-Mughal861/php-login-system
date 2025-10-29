@@ -39,25 +39,27 @@ $username = $_SESSION['username'] ?? 'Guest';
         justify-content: center;
         align-items: center;
         text-align: center;
+        color: white;
   }
   a{
 
      text-decoration: none;
-      color: white;
+      color: black;
       font-weight: bold;
       cursor: pointer;
       padding: 5px;
-      border: 1px solid red;
+      border: 1px solid white;
         border-radius: 5px;
-        background-color: red;
-         align-items: center;
+        background-color: white;
          text-align: center;
-         justify-content: center;
-         display: flex;
+         padding: 12px 24px;
+        
+     
          &:hover {
         transform: scale(1.05);
          }
-        
+        left: 50%;
+        width: 50px;
   }
 
     .popup {
@@ -74,6 +76,7 @@ $username = $_SESSION['username'] ?? 'Guest';
   z-index: 9999;
   font-size: 18px;
   text-align: center;
+  width: 80px;
 }
 .popup.success { background-color: #4CAF50; } 
 .popup.error { background-color: #f44336; }
@@ -83,10 +86,123 @@ $username = $_SESSION['username'] ?? 'Guest';
   80% {opacity: 1;}
   100% {opacity: 0; display: none;}
 }
+p{
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+   
+}
+   body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f8fb;
+      background-color: black;
+    }
+
+    .navbar {
+      background-color: lightsalmon;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      height: 130px;
+    }
+
+    .navbar h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar ul li {
+      display: inline;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+      background-color: black;
+    }
+
+    .navbar ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      padding: 40px;
+      text-align: center;
+      color: white;
+    }
+
+    .logout-btn {
+      background-color: lightblue;
+      color: black;
+      padding: 8px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .logout-btn:hover {
+      background-color: lightcoral;
+      color: white;
+    }
+
+     footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: lightsalmon;
+      color: black;
+      text-align: center;
+      padding: 30px 0;
+      height: 50px;
+    }
 
 
 
 </style>
+
+ <div class="navbar">
+    <h2>Welcome, to the Web</h2>
+    <ul>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Info</a></li>
+     
+    </ul>
+  </div>
+
+  <div class="content">
+    <h1>Welcome to the Dashboard</h1>
+   
+  </div>
+
+
+  <body>
+
+  <footer>
+    © 2025 Login.com | All Rights Reserved
+  </footer>
+
+
 
 <?php if ($msg = flash('error')): ?>
   <div class="popup error"><?= htmlspecialchars($msg) ?></div>
@@ -97,7 +213,7 @@ $username = $_SESSION['username'] ?? 'Guest';
 
   <h2>Welcome, <?=htmlspecialchars($username)?></h2>
 
-  <p><a href="logout.php">Logout</a></p>
+  <a href="logout.php">Logout</a>
   
 
   

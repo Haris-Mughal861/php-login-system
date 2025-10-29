@@ -231,7 +231,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-  <h1>Enter Details</h1>
+  <h1>REGISTER NOW</h1>
+  
 
 <img src="reg.png" alt="Description" width="80" height="65">
 
@@ -261,7 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="form-group">
       <label>Age:</label>
-      <input type="number" name="age">
+      <input  min= "1" max="120" type="number" name="age">
     </div>
 
 

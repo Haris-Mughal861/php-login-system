@@ -1,4 +1,4 @@
-<<?php
+<?php
 require 'config.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -76,6 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
+
+
 <?php if ($msg = flash('error')): ?>
   <div class="popup error"><?= htmlspecialchars($msg) ?></div>
 <?php elseif ($msg = flash('success')): ?>
@@ -108,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   100% {opacity: 0; display: none;}
 }
     body{
-        background-color: lightblue;
+        background-color: lightgray;
         padding: 80px;
     }
 
