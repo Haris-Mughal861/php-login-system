@@ -77,9 +77,9 @@
 
 <form id="loginForm" class="container">
   <label>Email:</label>
-  <input type="email" name="email" required>
+  <input type="email" name="email" >
   <label>Password:</label>
-  <input type="password" name="password" required>
+  <input type="password" name="password">
   <button type="submit">Login</button>
   <a href="register.php">Dont have Account?</a>
 </form>
@@ -94,23 +94,90 @@ $("#loginForm").submit(function(e) {
   e.preventDefault();
 
   $.ajax({
-    url: "ajax/ajax_login.php",  
+    url: "ajax/ajax_login.php",
     type: "POST",
     data: $(this).serialize(),
     success: function(response) {
       if (response.trim() === "success") {
-        setTimeout(() => window.location.href = "index.php", 1500);
-        $("#loginMsg").css("color", "green").text("Login successful! Redirecting...");
         
+        localStorage.setItem("loginSuccess", "true");
+    
+        window.location.href = "index.php";
       } else {
-        $("#loginMsg").css("color", "red").text(response);
+        $("#loginMsg")
+          .css("color", "red")
+          .text("Invalid username or password.");
       }
     },
     error: function() {
-      $("#loginMsg").css("color", "red").text("Server error. Please try again.");
+      $("#loginMsg")
+        .css("color", "red")
+        .text("Server error. Try again.");
+    }
+  });
+});
+
+
+
+
+function showPopup(message, color = "#f44336") {
+  const popup = $(`
+    <div style="
+      position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: red;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  z-index: 9999;
+  opacity: 0.9;
+    ">${message}</div>
+  `);
+  $("body").append(popup);
+  setTimeout(() => popup.fadeOut(500, () => popup.remove()), 2000);
+}
+
+$("#loginForm").submit(function(e) {
+  e.preventDefault();
+
+  $.ajax({
+    url: "ajax/ajax_login.php",
+    type: "POST",
+    data: $(this).serialize(),
+    success: function(response) {
+      const res = response.trim();
+      if (res === "success") {
+        localStorage.setItem("loginSuccess", "true");
+        window.location.href = "index.php";
+      } else {
+        showPopup(res); 
+      }
+    },
+    error: function() {
+      showPopup("Server error. Try again.");
     }
   });
 });
 </script>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

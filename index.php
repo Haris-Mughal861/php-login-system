@@ -62,21 +62,21 @@ $username = $_SESSION['username'] ?? 'Guest';
   }
 
     .popup {
- position: fixed;
-  top: 13%;
+  position: fixed;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 20px 40px;
-  border-radius: 5px;
-  color: #fff;
-  font-weight: 500;
-  animation: fadeOut 2s forwards;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.4);
-  z-index: 9999;
+  background: #4CAF50;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
   font-size: 18px;
-  text-align: center;
-  width: 80px;
+  font-weight: bold;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  z-index: 9999;
+  opacity: 0.9;
 }
+
 .popup.success { background-color: #4CAF50; } 
 .popup.error { background-color: #f44336; }
 
@@ -221,65 +221,65 @@ p{
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$("#loginForm").submit(function(e) {
-  e.preventDefault();
-
-  $.ajax({
-    url: "ajax/ajax_login.php",  
-    type: "POST",
-    data: $(this).serialize(),
-    success: function(response) {
-      if (response.trim() === "success") {
-        setTimeout(() => window.location.href = "index.php", 1500);
-        $("#loginMsg").css("color", "green").text("Login successful! Redirecting...");
-        
-      } else {
-        $("#loginMsg").css("color", "red").text(response);
-      }
-    },
-    error: function() {
-      $("#loginMsg").css("color", "red").text("Server error. Please try again.");
-    }
-  });
-});
-</script>
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script>
-$("#logoutBtn").click(function() {
+$("#logoutBtn").click(function(e) {
+  e.preventDefault(); 
 
   $.ajax({
     url: "ajax/ajax_logout.php",
     type: "POST",
     success: function(response) {
       if (response.trim() === "success") {
-
-
-        $("#logoutMsg")
-          .css({
-            "color": "green",
-            "font-weight": "bold",
-            "text-align": "center",
-            "margin-top": "20px"
-          })
-          .text("Logout successful! Redirecting...");
-        setTimeout(() => window.location.href = "login.php", 1500);
+        
+        const popup = $('<div class="popup success">Logout successful!</div>');
+        $("body").append(popup);
+        setTimeout(() => {
+          popup.fadeOut(500, () => popup.remove());
+          window.location.href = "login.php";
+        }, 1500);
       } else {
-        $("#logoutMsg")
-          .css("color", "red")
-          .text("Logout failed. Try again.");
+        alert("Logout failed. Try again.");
       }
     },
     error: function() {
-      $("#logoutMsg")
-        .css("color", "red")
-        .text("Server error. Please try again.");
+      alert("Server error. Please try again.");
     }
   });
 });
 </script>
+
+<div id="popup" style="
+   
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #4CAF50;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  z-index: 9999;
+  opacity: 0.9;
+">Login Successful!</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (localStorage.getItem("loginSuccess") === "true") {
+    const popup = document.getElementById("popup");
+    popup.style.display = "block";
+
+    setTimeout(() => {
+      popup.style.display = "none";
+      localStorage.removeItem("loginSuccess");
+    }, 2000);
+  }
+});
+</script>
+
+
+
 
 
   
