@@ -154,6 +154,7 @@ $("#loginForm").submit(function(e) {
       if (res === "success") {
         localStorage.setItem("loginSuccess", "true");
         window.location.href = "index.php";
+        const res = response.trim();
       } else {
         showPopup(res); 
       }

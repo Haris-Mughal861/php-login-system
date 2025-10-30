@@ -114,17 +114,17 @@
       <input type="text" name="username">
     </div>
 
-    <div class="form-group">
+    <div class="form-group" method = "POST">
       <label>Email:</label>
       <input type="email" name="email">
     </div>
 
-    <div class="form-group">
+    <div class="form-group" method = "POST">
       <label>Password:</label>
       <input type="password" name="password">
     </div>
 
-    <div class="form-group">
+    <div class="form-group" method = "POST">
       <label>Age:</label>
       <input min="1" max="120" type="number" name="age">
     </div>
@@ -137,27 +137,64 @@
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <script>
-  $("#registerForm").submit(function(e) {
-    e.preventDefault();
-    $.ajax({
-      url: "ajax/ajax_register.php",
-      type: "POST",
-      data: $(this).serialize(),
-      success: function(response) {
-        let msgBox = $("#regMsg");
-        msgBox.show().text(response);
+<script>
+function showPopup(message, type = "error") {
+  const bg = type === "success" ? "#4CAF50" : "#f44336";
+  const popup = $(`
+    <div style="
+       position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: red;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  z-index: 9999;
+  opacity: 0.9;
+    ">${message}</div>
+  `);
+  $("body").append(popup);
+  setTimeout(() => popup.fadeOut(500, () => popup.remove()), 2000);
+}
 
-        if (response === "success") {
-          msgBox.removeClass("error").addClass("success").text("Registered successfully! Redirecting...");
-          setTimeout(() => window.location.href = "login.php", 2000);
-        } else {
-          msgBox.removeClass("success").addClass("error");
-        }
+$("#registerForm").submit(function(e) {
+  e.preventDefault();
+
+  $.ajax({
+    url: "ajax/ajax_register.php",
+    type: "POST",
+    data: $(this).serialize(),
+    success: function(response) {
+      const res = response.trim();
+
+      if (res === "success") {
+        showPopup("Registered successfully! Redirecting...", "success");
+        setTimeout(() => window.location.href = "login.php", 2000);
+      } 
+      else if (res === "All fields are required.") {
+        showPopup(" Please fill all fields.");
+      } 
+      else if (res === "You must be older than 10 to register.") {
+        showPopup(" You must be older than 10.");
+      } 
+      else if (res === "Email already registered.") {
+        showPopup(" Email already registered.");
+      } 
+      else {
+        showPopup("" + res);
       }
-    });
+    },
+    error: function() {
+      showPopup("Server error. Try again.");
+    }
   });
-  </script>
+});
+</script>
+
 
 </body>
 </html>
