@@ -103,10 +103,7 @@ $("#loginForm").submit(function(e) {
         localStorage.setItem("loginSuccess", "true");
     
         window.location.href = "index.php";
-      } else {
-        $("#loginMsg")
-          .css("color", "red")
-          .text("Invalid username or password.");
+      
       }
     },
     error: function() {

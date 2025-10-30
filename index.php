@@ -184,9 +184,11 @@ p{
       <li><a href="index.php">Home</a></li>
       <li><a href="#">About</a></li>
       <li><a href="#">Contact</a></li>
-      <li><a href="#">Info</a></li>
-     
+      <li><a href="info.php">Info</a></li>
+    
     </ul>
+
+     <button id="logoutBtn">Logout</button>
   </div>
 
   <div class="content">
@@ -212,7 +214,7 @@ p{
 
   <h2>Welcome, <?=htmlspecialchars($username)?></h2>
 
- <button id="logoutBtn">Logout</button>
+ 
 <div id="logoutMsg"></div>
 
 
@@ -273,7 +275,7 @@ document.addEventListener("DOMContentLoaded", function() {
     setTimeout(() => {
       popup.style.display = "none";
       localStorage.removeItem("loginSuccess");
-    }, 2000);
+    }, 200);
   }
 });
 </script>

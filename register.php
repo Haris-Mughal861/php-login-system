@@ -172,7 +172,7 @@ $("#registerForm").submit(function(e) {
       const res = response.trim();
 
       if (res === "success") {
-        showPopup("Registered successfully! Redirecting...", "success");
+        showPopup("Registered successfully!", "success");
         setTimeout(() => window.location.href = "login.php", 2000);
       } 
       else if (res === "All fields are required.") {
